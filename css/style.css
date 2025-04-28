@@ -1,0 +1,19 @@
+body {
+    background-color: #393939;
+    color: lightgray;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 20px;
+    font-family: "Calibri", serif
+}
+
+img {
+    image-rendering: pixelated;
+}
+
+.grayscale {
+    filter: grayscale(1);
+}

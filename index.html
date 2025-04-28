@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Worlds @ OSRS.Cafe</title>
+        <meta name="description" content="Oldschool Runescape World List">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="icon" type="image/png" href="img/icon.png">
+    </head>
+    <body>
+        <div>
+            <div><h1>Worlds @ OSRS.Cafe</h1></div>
+            <div><h3>Oldschool Runescape World List</h3></div>
+            <div>
+                <button id="refresh-countdown-button">
+                    <span id="refresh-countdown"></span><span>🔄️</span>
+                </button>
+            </div>
+            <div><h4 id="player-count">Loading...</h4></div>
+            <div>
+                <table align="center">
+                    <tr>
+                        <th>Access</th>
+                        <th>Location</th>
+                        <th>Players</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <!--<div onclick="switch_access()">--><img id="access_btn" style="width:64px;height:64px;"><!--</div>-->
+                        </th>
+                        <th>
+                            <div>
+                                <img class="loc_filter_button" key="germany" id="loc_filter_de" width="32px" src="http://127.0.0.1/img/flags/de.svg">
+                                <img class="loc_filter_button" key="united_kingdom" id="loc_filter_gb" width="32px" src="http://127.0.0.1/img/flags/gb.svg">
+                            </div>
+                            <div>
+                                <img class="loc_filter_button" key="australia" id="loc_filter_au" width="32px" src="http://127.0.0.1/img/flags/au.svg">
+                                <img class="loc_filter_button" key="united_states" id="loc_filter_us" width="32px" src="http://127.0.0.1/img/flags/us.svg">
+                            </div>
+                        </th>
+                        <th>
+                            <!--
+                                Any
+                                Over
+                                Under
+                                Atleast
+
+                            --><!--
+                            <select>
+                                <option>Any</option>
+                                <option>Over</option>
+                                <option>Under</option>
+                                <option>Any</option>
+
+                            </select>-->
+                            <span style="width:200px;height:10px;">
+                                <input id="player_chooser_left" type="number" style="width:60px;">
+                                <button id="player_chooser_type">></button>
+                                <input id="player_chooser_right" type="number" style="width:60px;">
+                            </span>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <table id="world-list" align="center"></table>
+        </div>
+    </body>
+    <script type="module" src="js/app.js"></script>
+</html>
