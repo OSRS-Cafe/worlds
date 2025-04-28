@@ -1,7 +1,7 @@
 import { WorldsLoader } from "./world_data.js";
 
 export class RefreshManager {
-    static #refresh_time = 5;
+    static #refresh_time = 60;
     static #refresh_countdown = -1;
     static #countdown_label;
     static #refresh_button;
