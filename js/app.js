@@ -14,7 +14,8 @@ console.log(`[Worlds @ OSRS.Cafe] Welcome! Enjoy your stay!`);
 
 const world_renderer = new WorldListRenderer(
     Utils.get_element_by_id("world-list"),
-    Utils.get_element_by_id("player-count")
+    Utils.get_element_by_id("player-count"),
+    Utils.get_element_by_id("player-count-filtered")
 );
 
 PlayerCountFilter.start(

@@ -7,10 +7,12 @@ import { ActivityStrings } from "./activity_strings.js";
 export class WorldListRenderer {
     #world_list_root;
     #world_player_count;
+    #world_player_count_filtered;
 
-    constructor(world_list_root, world_player_count) {
+    constructor(world_list_root, world_player_count, world_player_count_filtered) {
         this.#world_list_root = world_list_root;
         this.#world_player_count = world_player_count;
+        this.#world_player_count_filtered = world_player_count_filtered;
     }
 
     render() {
@@ -21,6 +23,7 @@ export class WorldListRenderer {
 
         const world_data_latest = RefreshManager.world_data;
         this.#world_player_count.innerText = `There are currently ${world_data_latest.players} players in Gielinor!`;
+        this.#world_player_count_filtered.innerText = `Listing ${world_data_latest.worlds.length} Worlds with ${world_data_latest.filteredPlayers} Players in them!`;
         world_data_latest.worlds.filter(filter_function).forEach((world) => {
             const new_world_root = document.createElement("tr");
             if(world.access === "MEMBERS") {
