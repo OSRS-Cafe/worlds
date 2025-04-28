@@ -17,3 +17,7 @@ img {
 .grayscale {
     filter: grayscale(1);
 }
+
+td {
+    padding: 0 5px;
+}

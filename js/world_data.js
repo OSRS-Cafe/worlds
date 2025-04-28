@@ -1,6 +1,7 @@
 export class WorldInfo {
-    constructor({ name, players, location, access, activity }) {
+    constructor({ name, id, players, location, access, activity }) {
         this.name = name;
+        this.id = id;
         this.players = players;
         this.location = location;
         this.access = access;

@@ -15,7 +15,7 @@ export class WorldListRenderer {
 
     render() {
         console.log("[WorldListRenderer] Rendering Worlds");
-        this.#world_list_root.innerHTML = "<tr><th>Name</th><th>Players</th><th>Location</th><th>Activity</th></tr>"
+        this.#world_list_root.innerHTML = "<tr><th>Name</th><th>ID</th><th>Players</th><th>Location</th><th>Activity</th></tr>"
 
         const filter_function = (world) => { return AccessFilter.check(world) && LocationFilter.check(world) && PlayerCountFilter.check(world) };
 
@@ -30,6 +30,10 @@ export class WorldListRenderer {
             const new_world_name = document.createElement("td");
             new_world_name.innerText = world.name;
             new_world_root.appendChild(new_world_name)
+
+            const new_world_id = document.createElement("td");
+            new_world_id.innerText = world.id;
+            new_world_root.appendChild(new_world_id)
 
             const new_world_players = document.createElement("td");
             new_world_players.innerText = world.players;
