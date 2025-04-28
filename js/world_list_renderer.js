@@ -2,6 +2,7 @@ import { AccessFilter } from "./access_filter.js";
 import { LocationFilter } from "./location_filter.js";
 import { PlayerCountFilter } from "./player_count_filter.js";
 import { RefreshManager } from "./refresh_manager.js";
+import { ActivityStrings } from "./activity_strings.js";
 
 export class WorldListRenderer {
     #world_list_root;
@@ -39,7 +40,7 @@ export class WorldListRenderer {
             new_world_root.appendChild(new_world_loc)
 
             const new_world_activity = document.createElement("td");
-            new_world_activity.innerText = world.activity;
+            new_world_activity.innerText = ActivityStrings[world.activity] ?? `Missing ActivityString "${world.activity}"`;
             new_world_root.appendChild(new_world_activity)
 
             this.#world_list_root.appendChild(new_world_root);
