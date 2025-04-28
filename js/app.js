@@ -5,6 +5,11 @@ import { AccessFilter } from './access_filter.js';
 import { LocationFilter } from "./location_filter.js";
 import { WorldListRenderer } from "./world_list_renderer.js";
 
+//Enforce HTTPS (https://stackoverflow.com/a/4723302)
+if (location.host !== "127.0.0.1" && location.protocol !== 'https:' && location.protocol !== 'file:') {
+    location.replace(`https:${location.href.substring(location.protocol.length)}`);
+}
+
 console.log(`[Worlds @ OSRS.Cafe] Welcome! Enjoy your stay!`);
 
 const world_renderer = new WorldListRenderer(
