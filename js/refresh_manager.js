@@ -1,7 +1,7 @@
 import { WorldsLoader } from "./world_data.js";
 
 export class RefreshManager {
-    static #refresh_time = 60;
+    static #refresh_time = 5;
     static #refresh_countdown = -1;
     static #countdown_label;
     static #refresh_button;
@@ -11,6 +11,7 @@ export class RefreshManager {
 
     static #tick() {
         if(this.#refresh_countdown < 0) {
+            this.#countdown_label.innerText = "Loading...";
             WorldsLoader.get().then(worldData => {
                 this.world_data = worldData;
                 this.#world_list_renderer.render();
@@ -18,9 +19,10 @@ export class RefreshManager {
                 this.#refresh_countdown = this.#refresh_time;
                 this.#refresh_button.title = `Last refreshed: ${new Date().toString()}`;
             })
+        } else {
+            this.#countdown_label.innerText = `${this.#refresh_countdown}`;
+            this.#refresh_countdown--;
         }
-        this.#countdown_label.innerText = `${this.#refresh_countdown}`;
-        this.#refresh_countdown--;
     }
 
     static #reset() {
