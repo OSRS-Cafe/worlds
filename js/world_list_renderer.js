@@ -36,7 +36,7 @@ export class WorldListRenderer {
             new_world_root.appendChild(new_world_players);
 
             const new_world_loc = document.createElement("td");
-            new_world_loc.innerHTML = `<img width="32px" src="${LocationFilter.get_flag(world.location)}">`;
+            new_world_loc.innerHTML = `<img alt="Location: ${world.location.replace("_", " ").toLowerCase()}" width="32px" src="${LocationFilter.get_flag(world.location)}">`;
             new_world_root.appendChild(new_world_loc)
 
             const new_world_activity = document.createElement("td");
