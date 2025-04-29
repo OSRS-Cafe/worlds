@@ -20,4 +20,15 @@ export class URLManager {
         let current = new URL(document.URL);
         return current.searchParams.get("location");
     }
+
+    static set_filter(key, filter) {
+        let current = new URL(document.URL);
+        current.searchParams.set(key, filter);
+        history.replaceState("", "", current.href);
+    }
+
+    static get_filter(key) {
+        let current = new URL(document.URL);
+        return current.searchParams.get(key);
+    }
 }
