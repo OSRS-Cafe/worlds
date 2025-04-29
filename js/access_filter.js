@@ -23,7 +23,7 @@ function getById(id) {
 }
 
 export class AccessFilter {
-    static #access_type = getById(URLManager.get_access_filter()) ?? AccessType.NONE;
+    static #access_type = getById(URLManager.get_filter("access")) ?? AccessType.NONE;
 
     static #access_filter_button;
 
@@ -38,7 +38,7 @@ export class AccessFilter {
             case AccessType.FREE:    this.#access_type = AccessType.MEMBERS;  break;
             case AccessType.MEMBERS: this.#access_type = AccessType.NONE;     break;
         }
-        URLManager.set_access_filter(this.#access_type.id);
+        URLManager.set_filter("access", this.#access_type.id);
     }
 
     static #update_button_image() {

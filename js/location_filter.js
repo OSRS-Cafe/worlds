@@ -59,7 +59,7 @@ export class LocationFilter {
         console.log(`[LocationFilter] init`);
         this.#buttons = buttons;
 
-        const initial_location_filter = URLManager.get_location_filter();
+        const initial_location_filter = URLManager.get_filter("location");
         if(initial_location_filter != null) {
             this.#location_filter = initial_location_filter.split(";").map(location => {
                 return getEnumByShortId(location)
@@ -79,7 +79,7 @@ export class LocationFilter {
                 world_list_renderer.render();
 
                 const url_location_filter = this.#location_filter.map(loc => loc.shortId).join(";");//this.#location_filter.map((loc) => { return loc.shortId; }).join(";");
-                URLManager.set_location_filter(url_location_filter);
+                URLManager.set_filter("location", url_location_filter);
             };
         }
 

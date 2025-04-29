@@ -1,34 +1,15 @@
 export class URLManager {
-    static set_access_filter(filter) {
-        let current = new URL(document.URL);
-        current.searchParams.set("access", filter);
-        history.replaceState("", "", current.href);
-    }
-
-    static get_access_filter() {
-        let current = new URL(document.URL);
-        return current.searchParams.get("access");
-    }
-
-    static set_location_filter(filter) {
-        let current = new URL(document.URL);
-        current.searchParams.set("location", filter);
-        history.replaceState("", "", current.href);
-    }
-
-    static get_location_filter() {
-        let current = new URL(document.URL);
-        return current.searchParams.get("location");
-    }
-
     static set_filter(key, filter) {
         let current = new URL(document.URL);
         current.searchParams.set(key, filter);
+
+        if(filter === "")
+            current.searchParams.delete(key);
+
         history.replaceState("", "", current.href);
     }
 
     static get_filter(key) {
-        let current = new URL(document.URL);
-        return current.searchParams.get(key);
+        return new URL(document.URL).searchParams.get(key);
     }
 }

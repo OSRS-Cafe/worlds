@@ -305,6 +305,7 @@ export class ActivityFilter {
         if(this.#activities.length !== 0) {
             const label2 = document.createElement("option");
             label2.textContent = "--------------------------";
+            label2.value = ""
             this.#dropdown.appendChild(label2);
         }
 
@@ -322,10 +323,12 @@ export class ActivityFilter {
     static start(dropdown, world_list_renderer) {
         this.#dropdown = dropdown;
         this.#dropdown.onchange = () => {
-            if(this.#activities.includes(this.#dropdown.value)) {
-                Utils.remove_from_array(this.#activities, ActivityType[this.#dropdown.value]);
+            if(this.#dropdown.value === "") return;
+            const type = ActivityType[this.#dropdown.value];
+            if(this.#activities.includes(type)) {
+                Utils.remove_from_array(this.#activities, type);
             } else {
-                this.#activities.push(ActivityType[this.#dropdown.value]);
+                this.#activities.push(type);
             }
             this.#refresh_dropdown();
             world_list_renderer.render();
