@@ -1,20 +1,29 @@
+import { URLManager } from "./url_manager.js";
+
 export const AccessType = Object.freeze({
     NONE: {
-        id: "none",
+        id: "NONE",
         image: "img/star_both.png",
     },
     FREE: {
-        id: "free",
+        id: "FREE",
         image: "img/star_free.png",
     },
     MEMBERS: {
-        id: "members",
+        id: "MEMBERS",
         image: "img/star_members.png",
     }
 });
 
+function getById(id) {
+    for(const type of Object.entries(AccessType)) {
+        if(type[1].id === id) return type[1];
+    }
+    return null;
+}
+
 export class AccessFilter {
-    static #access_type = AccessType.NONE;
+    static #access_type = getById(URLManager.get_access_filter()) ?? AccessType.NONE;
 
     static #access_filter_button;
 
@@ -29,6 +38,7 @@ export class AccessFilter {
             case AccessType.FREE:    this.#access_type = AccessType.MEMBERS;  break;
             case AccessType.MEMBERS: this.#access_type = AccessType.NONE;     break;
         }
+        URLManager.set_access_filter(this.#access_type.id);
     }
 
     static #update_button_image() {

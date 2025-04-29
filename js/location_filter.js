@@ -1,37 +1,38 @@
 import { Utils } from "./utils.js";
+import { URLManager } from "./url_manager.js";
 
 export const LocationFilterEnum = Object.freeze({
     GERMANY: {
         id: "GERMANY",
+        shortId: "DE",
         image: "img/flags/de.svg",
     },
     AUSTRALIA: {
         id: "AUSTRALIA",
+        shortId: "AU",
         image: "img/flags/au.svg",
     },
     UNITED_STATES: {
         id: "UNITED_STATES",
+        shortId: "US",
         image: "img/flags/us.svg",
     },
     UNITED_KINGDOM: {
         id: "UNITED_KINGDOM",
+        shortId: "UK",
         image: "img/flags/gb.svg",
     }
 });
 
 function getEnumById(id) {
-    const all = [LocationFilterEnum.GERMANY, LocationFilterEnum.AUSTRALIA, LocationFilterEnum.UNITED_KINGDOM, LocationFilterEnum.UNITED_STATES];
-    for(const item of all) {
-        if(item.id.toLowerCase() === id.toLowerCase()) {
-            return item;
-        }
-    }
-    console.error(`LocationFilter ${id} not found.}`);
-    return null;
+    return Object.values(LocationFilterEnum).filter(location =>  location.id === id )[0]
+}
+function getEnumByShortId(shortId) {
+    return Object.values(LocationFilterEnum).filter(location =>  location.shortId === shortId )[0]
 }
 
 export class LocationFilter {
-    static #location_filter = [LocationFilterEnum.GERMANY, LocationFilterEnum.AUSTRALIA, LocationFilterEnum.UNITED_KINGDOM, LocationFilterEnum.UNITED_STATES];
+    static #location_filter = [LocationFilterEnum.GERMANY, LocationFilterEnum.AUSTRALIA, LocationFilterEnum.UNITED_KINGDOM, LocationFilterEnum.UNITED_STATES]; // default
     static #buttons;
 
     static check(world) {
@@ -58,6 +59,14 @@ export class LocationFilter {
         console.log(`[LocationFilter] init`);
         this.#buttons = buttons;
 
+        const initial_location_filter = URLManager.get_location_filter();
+        if(initial_location_filter != null) {
+            this.#location_filter = initial_location_filter.split(";").map(location => {
+                return getEnumByShortId(location)
+            });
+        }
+        this.refresh_button_styles();
+
         for(const button of buttons) {
             const location = getEnumById(button.getAttribute("key"));
             button.onclick = () => {
@@ -68,6 +77,9 @@ export class LocationFilter {
                 }
                 this.refresh_button_styles();
                 world_list_renderer.render();
+
+                const url_location_filter = this.#location_filter.map(loc => loc.shortId).join(";");//this.#location_filter.map((loc) => { return loc.shortId; }).join(";");
+                URLManager.set_location_filter(url_location_filter);
             };
         }
 

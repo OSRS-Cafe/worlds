@@ -25,41 +25,31 @@
                         <th>Access</th>
                         <th>Location</th>
                         <th>Players</th>
+                        <th>Activity</th>
                     </tr>
                     <tr>
                         <th>
-                            <!--<div onclick="switch_access()">--><img id="access_btn" style="width:64px;height:64px;"><!--</div>-->
+                            <img id="access_btn" style="width:64px;height:64px;">
                         </th>
                         <th>
                             <div>
-                                <img alt="Location Filter: Germany" class="loc_filter_button" key="germany" id="loc_filter_de" width="32px" src="img/flags/de.svg">
-                                <img alt="Location Filter: United Kingdom"  class="loc_filter_button" key="united_kingdom" id="loc_filter_gb" width="32px" src="img/flags/gb.svg">
+                                <img alt="Location Filter: Germany" class="loc_filter_button" key="GERMANY" id="loc_filter_de" width="32px" src="img/flags/de.svg">
+                                <img alt="Location Filter: United Kingdom"  class="loc_filter_button" key="UNITED_KINGDOM" id="loc_filter_gb" width="32px" src="img/flags/gb.svg">
                             </div>
                             <div>
-                                <img alt="Location Filter: Australia"  class="loc_filter_button" key="australia" id="loc_filter_au" width="32px" src="img/flags/au.svg">
-                                <img alt="Location Filter: United States"  class="loc_filter_button" key="united_states" id="loc_filter_us" width="32px" src="img/flags/us.svg">
+                                <img alt="Location Filter: Australia"  class="loc_filter_button" key="AUSTRALIA" id="loc_filter_au" width="32px" src="img/flags/au.svg">
+                                <img alt="Location Filter: United States"  class="loc_filter_button" key="UNITED_STATES" id="loc_filter_us" width="32px" src="img/flags/us.svg">
                             </div>
                         </th>
                         <th>
-                            <!--
-                                Any
-                                Over
-                                Under
-                                Atleast
-
-                            --><!--
-                            <select>
-                                <option>Any</option>
-                                <option>Over</option>
-                                <option>Under</option>
-                                <option>Any</option>
-
-                            </select>-->
                             <span style="width:200px;height:10px;">
                                 <input id="player_chooser_left" type="number" style="width:60px;">
                                 <button id="player_chooser_type">></button>
                                 <input id="player_chooser_right" type="number" style="width:60px;">
                             </span>
+                        </th>
+                        <th>
+                            <select id="activity-dropdown"></select>
                         </th>
                     </tr>
                 </table>

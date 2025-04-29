@@ -18,6 +18,11 @@ img {
     filter: grayscale(1);
 }
 
+.world_sort_tab {
+    user-select: none;
+    cursor: pointer;
+}
+
 td {
     padding: 0 5px;
 }
