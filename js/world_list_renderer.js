@@ -3,6 +3,7 @@ import { LocationFilter } from "./location_filter.js";
 import { PlayerCountFilter } from "./player_count_filter.js";
 import { RefreshManager } from "./refresh_manager.js";
 import { ActivityFilter, ActivityType} from "./activity_filter.js";
+import { Utils } from "./utils.js";
 
 export const SortType = Object.freeze({
     WORLD_NAME: {
@@ -41,37 +42,15 @@ export class WorldListRenderer {
     #sort_mode = SortMode.DESCENDING;
 
     #sort_func = (world_a, world_b) => {
+        const w_a = this.#sort_mode === SortMode.ASCENDING ? world_a : world_b;
+        const w_b = this.#sort_mode === SortMode.ASCENDING ? world_b : world_a;
+
         switch(this.#sort_type) {
-            case SortType.WORLD_PLAYER_COUNT:
-                switch(this.#sort_mode) {
-                    case SortMode.ASCENDING: return world_a.players - world_b.players;
-                    case SortMode.DESCENDING: return world_b.players - world_a.players;
-                }
-                break;
-            case SortType.WORLD_ID:
-                switch(this.#sort_mode) {
-                    case SortMode.ASCENDING: return world_a.id - world_b.id;
-                    case SortMode.DESCENDING: return world_b.id - world_a.id;
-                }
-                break;
-            case SortType.WORLD_NAME:
-                switch(this.#sort_mode) {
-                    case SortMode.ASCENDING: return world_a.name.localeCompare(world_b.name);
-                    case SortMode.DESCENDING: return world_b.name.localeCompare(world_a.name);
-                }
-                break;
-            case SortType.WORLD_ACTIVITY:
-                switch(this.#sort_mode) {
-                    case SortMode.ASCENDING: return world_a.activity.localeCompare(world_b.activity);
-                    case SortMode.DESCENDING: return world_b.activity.localeCompare(world_a.activity);
-                }
-                break;
-            case SortType.WORLD_LOCATION:
-                switch(this.#sort_mode) {
-                    case SortMode.ASCENDING: return world_a.location.localeCompare(world_b.location);
-                    case SortMode.DESCENDING: return world_b.location.localeCompare(world_a.location);
-                }
-                break;
+            case SortType.WORLD_PLAYER_COUNT: return w_a.players - w_b.players;
+            case SortType.WORLD_ID: return w_a.id - w_b.id;
+            case SortType.WORLD_NAME: return w_a.name.localeCompare(w_b.name);
+            case SortType.WORLD_ACTIVITY: return w_a.activity.localeCompare(w_b.activity);
+            case SortType.WORLD_LOCATION: return w_a.location.localeCompare(w_b.location);
         }
         return 0;
     }
@@ -104,18 +83,22 @@ export class WorldListRenderer {
                 }
                 this.render();
             };
-            tab.innerText = value.label + " " + suffix;
+            tab.innerText = `${value.label} ${suffix}`;
             this.#world_list_root.appendChild(tab);
         }
 
-        const filter_function = (world) => {
-            return AccessFilter.check(world) && LocationFilter.check(world) && PlayerCountFilter.check(world) && ActivityFilter.check(world);
-        };
+        const filter_function = world => Utils.assert_all(
+            AccessFilter.check(world),
+            LocationFilter.check(world),
+            PlayerCountFilter.check(world),
+            ActivityFilter.check(world)
+        );
 
         const world_data_latest = RefreshManager.world_data;
         this.#world_player_count.innerText = `There are currently ${world_data_latest.players} players in Gielinor!`;
         world_data_latest.worlds.filter(filter_function).sort(this.#sort_func).forEach((world) => {
             const new_world_root = document.createElement("tr");
+
             if (world.access === "MEMBERS") {
                 new_world_root.style.color = "gold";
             }
@@ -137,7 +120,7 @@ export class WorldListRenderer {
             new_world_root.appendChild(new_world_loc)
 
             const new_world_activity = document.createElement("td");
-            const activity_label = ActivityType[world.activity] ?? {label: `Missing ActivityType "${world.activity}"`};
+            const activity_label = ActivityType[world.activity] ?? { label: `Missing ActivityType "${world.activity}"` };
             new_world_activity.innerText = activity_label.label;
             new_world_root.appendChild(new_world_activity)
 

@@ -7,6 +7,10 @@ export class Utils {
         return document.getElementsByClassName(class_name);
     }
 
+    static assert_all(...conditions) {
+        return conditions.filter(cond => !cond).length === 0
+    }
+
     static remove_from_array(array, item) {
         for(let i = array.length; i--;) {
             if(array[i] === item) {
