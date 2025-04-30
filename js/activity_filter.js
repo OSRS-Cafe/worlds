@@ -320,7 +320,7 @@ export class ActivityFilter {
         }
     }
 
-    static start(dropdown, world_list_renderer) {
+    static start({ dropdown, world_list_renderer }) {
         this.#dropdown = dropdown;
         this.#dropdown.onchange = () => {
             if(this.#dropdown.value === "") return;

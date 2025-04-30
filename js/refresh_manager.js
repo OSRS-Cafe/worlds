@@ -30,7 +30,7 @@ export class RefreshManager {
         this.#tick();
     }
 
-    static start(countdown_label, refresh_button, world_list_renderer) {
+    static start({ countdown_label, refresh_button, world_list_renderer }) {
         console.log("[RefreshManager] init");
         this.#countdown_label = countdown_label;
         this.#refresh_button = refresh_button;

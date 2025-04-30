@@ -55,7 +55,7 @@ export class LocationFilter {
         }
     }
 
-    static start(buttons, world_list_renderer) {
+    static start({ buttons, world_list_renderer }) {
         console.log(`[LocationFilter] init`);
         this.#buttons = buttons;
 

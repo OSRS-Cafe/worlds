@@ -43,7 +43,7 @@ export class PlayerCountFilter {
         }
     }
 
-    static start(player_count_filter_button, player_count_filter_left, player_count_filter_right, world_list_renderer) {
+    static start({ player_count_filter_button, player_count_filter_left, player_count_filter_right, world_list_renderer }) {
         this.#player_count_filter_button = player_count_filter_button;
         this.#player_count_filter_left = player_count_filter_left;
         this.#player_count_filter_right = player_count_filter_right;

@@ -13,35 +13,35 @@ if (location.host !== "127.0.0.1" && location.protocol !== 'https:' && location.
 
 console.log(`[Worlds @ OSRS.Cafe] Welcome! Enjoy your stay!`);
 
-const world_renderer = new WorldListRenderer(
-    Utils.get_element_by_id("world-list"),
-    Utils.get_element_by_id("player-count")
-);
+const world_renderer = new WorldListRenderer({
+    world_list_root: Utils.get_element_by_id("world-list"),
+    world_player_count: Utils.get_element_by_id("player-count")
+});
 
-PlayerCountFilter.start(
-    Utils.get_element_by_id("player_chooser_type"),
-    Utils.get_element_by_id("player_chooser_left"),
-    Utils.get_element_by_id("player_chooser_right"),
-    world_renderer
-);
+PlayerCountFilter.start({
+    player_count_filter_button: Utils.get_element_by_id("player_chooser_type"),
+    player_count_filter_left: Utils.get_element_by_id("player_chooser_left"),
+    player_count_filter_right: Utils.get_element_by_id("player_chooser_right"),
+    world_list_renderer: world_renderer
+});
 
-LocationFilter.start(
-    Utils.get_elements_by_class_name("loc_filter_button"),
-    world_renderer
-);
+LocationFilter.start({
+    buttons: Utils.get_elements_by_class_name("loc_filter_button"),
+    world_list_renderer: world_renderer
+});
 
-AccessFilter.start(
-    Utils.get_element_by_id("access_btn"),
-    world_renderer
-);
+AccessFilter.start({
+    access_filter_button: Utils.get_element_by_id("access_btn"),
+    world_list_renderer: world_renderer
+});
 
-ActivityFilter.start(
-    Utils.get_element_by_id("activity-dropdown"),
-    world_renderer
-);
+ActivityFilter.start({
+    dropdown: Utils.get_element_by_id("activity-dropdown"),
+    world_list_renderer: world_renderer
+});
 
-RefreshManager.start(
-    Utils.get_element_by_id("refresh-countdown"),
-    Utils.get_element_by_id("refresh-countdown-button"),
-    world_renderer
-);
+RefreshManager.start({
+    countdown_label: Utils.get_element_by_id("refresh-countdown"),
+    refresh_button: Utils.get_element_by_id("refresh-countdown-button"),
+    world_list_renderer: world_renderer
+});

@@ -45,7 +45,7 @@ export class AccessFilter {
         this.#access_filter_button.src = this.#access_type.image;
     }
 
-    static start(access_filter_button, world_list_renderer) {
+    static start({ access_filter_button, world_list_renderer }) {
         console.log(`[AccessFilter] init`);
         this.#access_filter_button = access_filter_button;
 

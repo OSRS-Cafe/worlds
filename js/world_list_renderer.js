@@ -76,7 +76,7 @@ export class WorldListRenderer {
         return 0;
     }
 
-    constructor(world_list_root, world_player_count) {
+    constructor({ world_list_root, world_player_count }) {
         this.#world_list_root = world_list_root;
         this.#world_player_count = world_player_count;
     }
