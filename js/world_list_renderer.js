@@ -38,7 +38,7 @@ export class WorldListRenderer {
     #world_list_root;
     #world_player_count;
     #sort_type = SortType.WORLD_PLAYER_COUNT;
-    #sort_mode = SortMode.ASCENDING;
+    #sort_mode = SortMode.DESCENDING;
 
     #sort_func = (world_a, world_b) => {
         switch(this.#sort_type) {
