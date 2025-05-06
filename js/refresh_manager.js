@@ -6,19 +6,24 @@ export class RefreshManager {
     static #countdown_label;
     static #refresh_button;
     static #world_list_renderer;
+    static #is_refreshing = false;
 
     static world_data;
 
     static #tick() {
         if(this.#refresh_countdown < 0) {
             this.#countdown_label.innerText = "Loading...";
-            WorldsLoader.get().then(worldData => {
-                this.world_data = worldData;
-                this.#world_list_renderer.render();
+            if(!this.#is_refreshing) {
+                this.#is_refreshing = true;
+                WorldsLoader.get().then(worldData => {
+                    this.world_data = worldData;
+                    this.#world_list_renderer.render();
 
-                this.#refresh_countdown = this.#refresh_time;
-                this.#refresh_button.title = `Last refreshed: ${new Date().toString()}`;
-            })
+                    this.#refresh_countdown = this.#refresh_time;
+                    this.#refresh_button.title = `Last refreshed: ${new Date().toString()}`;
+                    this.#is_refreshing = false;
+                });
+            }
         } else {
             this.#countdown_label.innerText = `${this.#refresh_countdown}`;
             this.#refresh_countdown--;
